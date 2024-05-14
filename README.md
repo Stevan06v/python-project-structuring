@@ -94,7 +94,7 @@ name="neptuncli"
 version="0.0.1"
 ```
 
-We can define a name, version, dependencies. Notice that i have defined a dynamic installation of the previously defined requirements in the `requirements.txt`-file, so that after running the `pyproject.toml` every defined package gets installed.
+We can define a name, version, dependencies... Notice that I have defined a dynamic installation of the previously defined requirements in the `requirements.txt`-file, so that after running the `pyproject.toml` every defined package gets installed.
 
 We can run the `pyproject.toml`-file by executing: 
 
