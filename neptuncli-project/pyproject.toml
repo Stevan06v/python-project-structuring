@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name="neptuncli"
+version="0.0.1"
+dependencies = [
+    "annotated-types==0.6.0",
+    "pydantic==2.7.1",
+    "pydantic_core==2.18.2",
+    "typing_extensions==4.11.0",
+]
+
+
+[project.scripts]
+neptuncli = "neptuncli.__main__:main"
