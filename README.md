@@ -1,9 +1,7 @@
 # PYTHON PROJECT STRUCTURING/SETUP
 This repository aims to provide information on how to structure your projects the right way in python to avoid monolythic horror workflows
 
-
 ## Steps
-
 
 ### Using Virtual-Environments
 
@@ -126,7 +124,7 @@ pip list
 
 The output looks in my case like this:
 
-```
+```text
 Package   Version Editable project location
 --------- ------- ------------------------------------------------------------------------
 neptuncli 0.0.1   /Users/stevanvlajic/Desktop/python-project-structuring/neptuncli-project
@@ -139,7 +137,7 @@ Notice that our application itself is now also installed as a package.
 Let's define a custom entrypoint for out application in the `pyproject.toml`-file: 
 
 
-```
+```toml
 [build-system]
 requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
@@ -161,3 +159,58 @@ Now it should be possible to run our application with the following command:
 neptuncli Hello, World! 
 ```
 
+Now that we have created a entrypoint we are ready to build our python application. Since python is a interpreted language and not compiled language we need a way to package and distribute our application. To achieve that we need to use pythons wheels. By adding the following to your `pyproject.toml`-file this should be easily achieved:
+
+```toml
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name="neptuncli"
+version="0.0.1"
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.scripts]
+neptuncli = "neptuncli.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["neptuncli*"]
+exclude = ["tests*"]
+```
+
+Now we have defined dynamic dependency reading and included every file out of our project(in my case `neptuncli*`) to the wheel. 
+
+To create the python-wheel file we need to run the following: 
+
+
+Install the builder-library: 
+```bash
+pip install build
+```
+
+To run the build let's do: 
+```bash
+python -m build
+```
+
+After running the file python created based on our `pyproject.toml` a `/dist`-directory with two files: 
+* `foo.tar.gz`
+* `foo.wheel`
+
+
+To install the python package globally, we need to install our wheel
+
+`/dist`:(in my case)
+
+```bash
+pip install neptuncli-0.0.1-py3-none-any.whl
+```
+
+After calling our defined entrypoint name in a new bash you should be able to use your application globally:
+
+In my case:
+```bash
+neptuncli
+```
