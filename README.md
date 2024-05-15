@@ -100,7 +100,7 @@ We can run the `pyproject.toml`-file by executing:
 pip install -e . 
 ```
 
-HINT: `-e` stands for editable and `.` references the current directory. `-e` ensures that after you edit your code a rerun is not of `pip install -e .` is not necessary. Mind that `-e` does not check if changes are made in the `pyproject.toml`-file. After changing something in that file rerun:
+HINT: `-e` stands for editable and `.` references the current directory. `-e` ensures that after you edit your code a rerun of `pip install -e .` is not necessary. Mind that `-e` does not check if changes are made in the `pyproject.toml`-file. After changing something in that file rerun:
 
 ```bash
 pip install -e . 
